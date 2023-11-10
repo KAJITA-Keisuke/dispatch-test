@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+  workflow_dispatch:
+    branches:
+      - main
+    inputs:
+      no-cache:
+        type: boolean
+        required: true
+        description: 'check'
+
+jobs:
+  work:
+    uses: ./.github/workflows/reusable.yaml
+    with:
+      no-cache: ${{ inputs.no-cache == 'true' }}

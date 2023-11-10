@@ -1,0 +1,16 @@
+on:
+  workflow_call:
+    inputs:
+      no-cache:
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  work:
+    runs-on: ubuntu-lataest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker Build
+        run: |
+          docker build . -f Dockerfile ${{ inputs.no-cache && '--no-cache' || '' }}
