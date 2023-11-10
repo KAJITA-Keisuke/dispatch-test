@@ -17,7 +17,13 @@ on:
         description: 'check'
 
 jobs:
+  pre:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "no-cache: ${{ inputs.no-cache }}"
   work:
+    needs: pre
     uses: ./.github/workflows/reusable.yaml
     with:
       no-cache: ${{ inputs.no-cache == 'true' }}
