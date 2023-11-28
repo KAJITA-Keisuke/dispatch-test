@@ -2,6 +2,8 @@ on:
   pull_request:
     branches:
       - main
+      - staging
+      - develop
     types:
       - opened
       - synchronize
@@ -23,6 +25,7 @@ jobs:
     steps:
       - run: |
           echo "no-cache: ${{ inputs.no-cache }}"
+          echo "event name: ${{ github.event_name }}"
   work:
     needs: pre
     uses: ./.github/workflows/reusable.yaml
